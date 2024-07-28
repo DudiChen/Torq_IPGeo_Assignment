@@ -1,6 +1,6 @@
 The Service requires the following Evironment Variables:
 
-DATABASE_TYPE =“csv”
+DATABASE_TYPE =“csv”\n
 DATABASE_PATH = <path to data.csv> 
 RATE_REQUESTS = 1
 RATE_INTERVAL = 1s
