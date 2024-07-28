@@ -5,7 +5,7 @@ DATABASE_PATH = <path to data.csv>
 RATE_REQUESTS = 1
 RATE_INTERVAL = 1s
 
-The above values are to run the service using a local csv type SB store that contains a single dummy data entry:
+The above values are to run the service using a local csv type SB store that contains a single dummy data entry:  
 67.250.186.196,New-York,United-States
 
 So in order to get a successfull hit, need to use a key (IP Address) of 67.250.186.196
@@ -21,6 +21,7 @@ Usefult command to run by Docker container:
 
 Get Container ID:
 sudo docker ps | grep ipgeo | awk '{print $1}'
+
 
 To get the docker IP address:
 sudo docker inspect \                                              
