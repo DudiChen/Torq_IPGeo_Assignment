@@ -2,9 +2,7 @@ package config
 
 import (
 	"errors"
-	"github.com/joho/godotenv"
 	"os"
-	"path/filepath"
 	"strconv"
 	"time"
 )
@@ -18,17 +16,17 @@ type Config struct {
 }
 
 func LoadConfig() (*Config, error) {
-	execPath, err := os.Getwd() // Get the current working directory
-	if err != nil {
-		return nil, errors.New("failed to determine the current working directory")
-	}
-
-	envPath := filepath.Join(execPath, ".env") // Construct the full path to the .env file
-	err = godotenv.Load(envPath)
-	if err != nil {
-		return nil, errors.New("failed to load .env file")
-	}
-
+	//execPath, err := os.Getwd() // Get the current working directory
+	//if err != nil {
+	//	return nil, errors.New("failed to determine the current working directory")
+	//}
+	//
+	//envPath := filepath.Join(execPath, ".env") // Construct the full path to the .env file
+	//err = godotenv.Load(envPath)
+	//if err != nil {
+	//	return nil, errors.New("failed to load .env file")
+	//}
+	//
 	databaseType := os.Getenv("DATABASE_TYPE")
 	if databaseType == "" {
 		return nil, errors.New("DATABASE_TYPE is not set")

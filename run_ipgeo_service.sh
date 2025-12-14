@@ -11,4 +11,4 @@ sudo apt upgrade -y
 
 sudo docker build -t $APP_NAME .
 
-sudo docker run -it $APP_NAME
+sudo docker run -it -p 8080:8080 $APP_NAME
