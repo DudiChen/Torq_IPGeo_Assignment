@@ -2,6 +2,7 @@ package config
 
 import (
 	"errors"
+	"github.com/joho/godotenv"
 	"os"
 	"strconv"
 	"time"
@@ -16,6 +17,11 @@ type Config struct {
 }
 
 func LoadConfig() (*Config, error) {
+	err := godotenv.Load()
+	if err != nil {
+		return nil, errors.New("failed to load .env file")
+	}
+
 	databaseType := os.Getenv("DATABASE_TYPE")
 	if databaseType == "" {
 		return nil, errors.New("DATABASE_TYPE is not set")
