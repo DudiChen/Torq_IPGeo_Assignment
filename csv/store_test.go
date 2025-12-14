@@ -19,6 +19,7 @@ func TestFindLocation(t *testing.T) {
 	}
 
 	csvData := "1.1.1.1,Yavne,United-States\n2.2.2.2,Lod,Germany"
+	var store models.Store
 	r := strings.NewReader(csvData)
 	store, err := NewStore(r)
 	if err != nil {
