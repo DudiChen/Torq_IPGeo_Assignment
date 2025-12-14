@@ -1,5 +1,10 @@
 # Interview Assignment: IP to Country Service in Go Language
 
+## Author
+
+**David (Dudi) Chen**  
+Date: July 28th, 2024
+
 ## Overview
 
 This project implements a simple and extensible **IP-to-Country REST API service**.  
@@ -103,10 +108,16 @@ Service will be available at:
 ```
 http://localhost:8080
 ```
+### Sending HTTP Requests
+Requests can be sent to the server via \
+Postman import or terminal execution of the following:
+```bash
+curl --location 'localhost:8080/v1/find-country?ip=67.250.186.196'
+```
 
 ---
 
-## Testing
+## Unit Testing
 
 Partial unit testing is included under:
 
@@ -114,9 +125,3 @@ Partial unit testing is included under:
 csv/store_test.go
 ```
 
----
-
-## Author
-
-**David (Dudi) Chen**  
-Date: July 28th, 2024
