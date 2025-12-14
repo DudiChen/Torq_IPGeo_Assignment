@@ -1,32 +1,122 @@
-The Service requires the following Evironment Variables:
+# Interview Assignment: IP to Country Service in Go Language
 
-DATABASE_TYPE =“csv”
-DATABASE_PATH = <path to data.csv> 
-RATE_REQUESTS = 1
-RATE_INTERVAL = 1s
+## Overview
 
-The above values are to run the service using a local csv type SB store that contains a single dummy data entry:  
+This project implements a simple and extensible **IP-to-Country REST API service**.  
+Given an IP address, the service returns its associated **country** and **city**, while enforcing a configurable **rate-limiting mechanism**.
+
+The service was implemented as part of a coding exercise, with a strong focus on:
+- Clear and readable code
+- Environment-based configuration
+- Extensibility for multiple IP-to-country data stores
+- Production-grade structure and behavior
+
+---
+
+## Features
+
+- REST API endpoint to resolve IP addresses into location data
+- Configurable request rate limiting (without external rate-limiting libraries)
+- Pluggable datastore design (CSV-based store implemented)
+- Environment variable–driven configuration
+- Dockerized execution for fast startup
+- Partial unit test coverage for the CSV datastore
+
+---
+
+## API Specification
+
+### Endpoint
+
+```
+GET /v1/find-country?ip=<IP_ADDRESS>
+```
+
+### Successful Response
+
+```json
+{
+  "country": "United-States",
+  "city": "New-York"
+}
+```
+
+### Error Response
+
+```json
+{
+  "error": "error message"
+}
+```
+
+Appropriate HTTP status codes are returned, including:
+- `400` for invalid requests
+- `404` if the IP address is not found
+- `429` when the rate limit is exceeded
+- `500` for internal server errors
+
+---
+
+## Configuration
+
+The service is fully configured using **environment variables**.  
+For local development, these can be set directly or via a `.env` file in the project root.
+
+### Required Environment Variables
+
+```env
+DATABASE_TYPE="csv"
+DATABASE_PATH="./csv/data.csv"
+RATE_REQUESTS=1
+RATE_INTERVAL="1s"
+PORT=8080
+```
+
+---
+
+## CSV Datastore
+
+### Format
+
+```
+ip,city,country
+```
+
+### Example Entry
+
+```
 67.250.186.196,New-York,United-States
+```
 
-So in order to get a successfull hit, need to use a key (IP Address) of 67.250.186.196
+---
 
-Note: The project does not include all CRUD needed funtionality to maintain the DB store as the assignment did not require it.
+## Running the Service
 
-Please see partial Unit-Testing available for CSV Store under csv/store_test.go
+### Using Docker
 
-The project includes a Dockerfile and bash script ["run_ipgeo_service.sh"].
-These facilitate a prompt execution by using a docker container.
+```bash
+./run_ipgeo_service.sh
+```
 
-Usefult command to run by Docker container:
+Service will be available at:
 
-Get Container ID:
-sudo docker ps | grep ipgeo | awk '{print $1}'
+```
+http://localhost:8080
+```
 
+---
 
-To get the docker IP address:
-sudo docker inspect \                                              
-  -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <CONTAINER_ID>
+## Testing
 
+Partial unit testing is included under:
 
-Send a HTTP request:
-curl --location '<CONTAINER_IP_ADDRESS>:8080/v1/find-country?ip=67.250.186.196'
+```
+csv/store_test.go
+```
+
+---
+
+## Author
+
+**David (Dudi) Chen**  
+Date: July 28th, 2024
